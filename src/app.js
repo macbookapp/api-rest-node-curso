@@ -1,5 +1,4 @@
 import express from 'express';
-
 import bodyParser from 'body-parser'
 import db  from '../DB/database'
 
@@ -13,15 +12,25 @@ app.use(bodyParser.json())
 //console.log( db )
 
 //Rutas
-import IndexRoute from '../Rutas/IndexRoute'
-import ClientesRoute from '../Rutas/ClientesRoute'
+//import IndexRoute from '../Rutas/IndexRoute'
+//import ClientesRoute from '../Rutas/ClientesRoute'
+
+//app.use('/', IndexRoute())
+//app.use('/', ClientesRoute())
+
+//Importamos las rutas del modulo Rutas
+import { 
+
+  IndexRoute, 
+  ClientesRoute
+
+} from '../Rutas/Rutas'
 
 app.use('/', IndexRoute())
 app.use('/', ClientesRoute())
 
 
 
-
 app.listen(port, () => {
-  console.log(`Server started at port ${port}`);
+  console.log(`Servidor en 127.0.0.1:${port}`);
 });
