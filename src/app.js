@@ -1,6 +1,5 @@
 import express from 'express';
-import indexRutas from '../Rutas/indexRutas'
-import PruebaRutas from '../Rutas/PruebaRutas'
+
 import bodyParser from 'body-parser'
 import db  from '../DB/database'
 
@@ -14,8 +13,12 @@ app.use(bodyParser.json())
 //console.log( db )
 
 //Rutas
-app.use('/', indexRutas())
-app.use('/', PruebaRutas())
+import IndexRoute from '../Rutas/IndexRoute'
+import ClientesRoute from '../Rutas/ClientesRoute'
+
+app.use('/', IndexRoute())
+app.use('/', ClientesRoute())
+
 
 
 
