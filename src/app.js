@@ -33,6 +33,8 @@ app.use('/', IndexRoute())
 app.use('/', ClientesRoute())
 app.use('/', ProductosRoute())
 
+app.use(express.static('uploads'))
+
 
 app.listen(port, () => {
   console.log(`Servidor en 127.0.0.1:${port}`);
