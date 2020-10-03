@@ -23,14 +23,16 @@ exports.todosClientes = async ( req, res ) =>{
     
 }
 
-exports.nuevoCliente = async ( req, res ) =>{
+exports.nuevoCliente = async ( req, res, next ) =>{
 
     try {
-        const nuevoCliente = await Cliente.create( req.body )
+        const nuevoCliente = new Cliente( req.body )
+        await nuevoCliente.save()
         res.json( nuevoCliente )
 
     } catch (error) {
         console.log(error)
+        next()
     }
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "babel-node",
   "version": "1.0.0",
-  "description": "",
+  "description": "api rest con Nodejs y Babel",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/app.js",
@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.10.7"
+    "mongoose": "^5.10.7",
+    "multer": "^1.4.2",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

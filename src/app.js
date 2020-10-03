@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import db  from '../DB/database'
 
 const app = express();
@@ -7,6 +8,7 @@ const port = process.env.PORT || 4000
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cors())
 
 //DB
 //console.log( db )
@@ -22,13 +24,14 @@ app.use(bodyParser.json())
 import { 
 
   IndexRoute, 
-  ClientesRoute
+  ClientesRoute,
+  ProductosRoute
 
 } from '../Rutas/Rutas'
 
 app.use('/', IndexRoute())
 app.use('/', ClientesRoute())
-
+app.use('/', ProductosRoute())
 
 
 app.listen(port, () => {
