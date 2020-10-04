@@ -1,6 +1,7 @@
 
 import Producto from '../Modelos/ProductoModel'
 
+
 const multer = require('multer');
 const shortid = require('shortid');
 
@@ -41,7 +42,7 @@ exports.subirArchivo = (req, res, next) => {
 }
 
 exports.todosProductos = async (req, res )=>{
-
+    
     const productos = await Producto.find({})
 
     if( productos.length === 0 ){
@@ -54,6 +55,7 @@ exports.todosProductos = async (req, res )=>{
 }
 
 exports.nuevoProducto = async( req, res, next ) =>{
+
     const nuevoProducto = new Producto ( req.body )
     try {
         if (req.file) {
@@ -66,5 +68,84 @@ exports.nuevoProducto = async( req, res, next ) =>{
         console.log(error)
         next()
     }
+
+}
+
+exports.buscarProducto = async ( req, res )=>{
+
+    const id = req.params.id
+    
+    try {
+        const producto = await Producto.findById( id )
+        if( producto ){
+            res.json( { Producto: producto } )
+        } else {
+            res.json( { Producto: 'El producto no existe, comprueba la id' } )
+        }
+    } catch (error) {
+        console.log( error )
+        res.json( { Error: 'El producto no existe, comprueba la id' } )
+    }
+}
+
+exports.actualizarProducto = async ( req, res, next ) => {
+
+    const id = req.params.id
+    const datos_actualizar = req.body
+   
+    try {
+        const productoAnterior = await Producto.findById( id )
+        if( productoAnterior ){
+            // Construimos un nuevo producto
+            const nuevoProducto = datos_actualizar
+
+            //Comprobar si hay imagen nueva
+            if ( req.file ){
+                nuevoProducto.imagen = req.file.filename
+            } else{
+                nuevoProducto.imagen = productoAnterior.imagen
+            }
+            try {
+
+                const producto = await Producto.findByIdAndUpdate( id, nuevoProducto, { new: true }  )
+                if( producto ){
+                    res.json( { Actualizado: producto } )
+                } else{
+                    res.json( { Buscar: 'El producto no existe, comprueba la id' } )
+                } 
+        
+       
+            } catch (error) {
+                console.log( error )
+                res.json( { Error: 'El producto no existe, comprueba la id' } )
+               }
+
+            
+        } else {
+            res.json( { Producto: 'El producto no existe, comprueba la id' } )
+        }
+    } catch (error) {
+        console.log( error )
+        res.json( { Error: 'El producto no existe, comprueba la id' } )
+    }
+    
+}
+
+exports.borrarProducto = async( req, res )=>{
+
+    try {
+        const producto = await Producto.findByIdAndDelete( req.params.id )
+        if( producto ){
+            res.json( { Borrado: producto } )
+       } else{
+           res.json( { Buscar: 'El producto no existe, comprueba la id' } )
+       } 
+
+    } catch (error) {
+        console.log( error )
+        res.json( { Error: 'El producto no existe, comprueba la id' } )
+    }
+
+    
 
 }

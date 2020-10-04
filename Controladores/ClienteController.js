@@ -69,8 +69,8 @@ exports.borrarCliente = async ( req, res ) => {
 
 exports.actualizarCliente = async ( req, res ) => {
     const id = req.params.id
-    const actualizar = req.body
-    const datos = await comprobar( id, 'actualizar', actualizar ) 
+    const datos_actualizar = req.body
+    const datos = await comprobar( id, 'actualizar', datos_actualizar ) 
     res.json( { Cliente_actualizado: datos } )
 }
 

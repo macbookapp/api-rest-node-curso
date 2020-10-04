@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan' 
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import db  from '../DB/database'
@@ -8,6 +9,7 @@ const port = process.env.PORT || 4000
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(morgan('tiny'))
 app.use(cors())
 
 //DB
@@ -25,13 +27,15 @@ import {
 
   IndexRoute, 
   ClientesRoute,
-  ProductosRoute
+  ProductosRoute,
+  PedidosRoute
 
 } from '../Rutas/Rutas'
 
 app.use('/', IndexRoute())
 app.use('/', ClientesRoute())
 app.use('/', ProductosRoute())
+app.use('/', PedidosRoute())
 
 app.use(express.static('uploads'))
 

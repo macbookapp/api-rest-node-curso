@@ -7,7 +7,8 @@ const url = `mongodb://127.0.0.1:27017/${database}`
 const opciones = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }
 
 const db = mongoose.connect(url, opciones).then(
