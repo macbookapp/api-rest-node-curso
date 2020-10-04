@@ -58,3 +58,19 @@ exports.actualizarPedido = async ( req, res )=>{
     
 
 }
+
+exports.borrarPedido = async ( req, res )=>{
+    try {
+        const pedido = await Pedido.findByIdAndDelete( req.params.id ).populate('cliente').populate( { path: 'pedido.producto', model: 'Producto' } )
+        if( pedido ){
+            res.json( { Pedido_borrado: pedido } )
+        } else{
+            res.json( { Buscar: 'Pedido no encontrado, revisa la id' } )
+        }
+
+    } catch ( error ) {
+        console.log( error )
+        res.json( { Error: 'Pedido no encontrado, revisa la id' } )
+    }
+
+}

@@ -13,6 +13,8 @@ module.exports = () => {
 
     router.put('/pedidos/:id', PedidosController.actualizarPedido)
 
+    router.delete('/pedidos/:id', PedidosController.borrarPedido)
+
 
 
     return router
